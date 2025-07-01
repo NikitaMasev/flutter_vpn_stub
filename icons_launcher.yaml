@@ -1,0 +1,5 @@
+icons_launcher: #dart run icons_launcher:create --path icons_launcher.yaml
+  image_path: "assets/png/launcher.png"
+  platforms:
+    android:
+      enable: true

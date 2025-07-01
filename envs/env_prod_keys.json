@@ -1,0 +1,5 @@
+{
+  "ENV": "prod",
+  "HOST": "https://google.ru",
+  "LOGS" : "true"
+}
