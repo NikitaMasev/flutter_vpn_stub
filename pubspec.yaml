@@ -1,5 +1,5 @@
 name: vpn_wireguard_stub
-description: "A new Flutter project."
+description: "Just stub vpn for training."
 version: 1.0.0+1
 
 environment:
