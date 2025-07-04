@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/configurators/app/app_dependencies_state.dart';
-import 'package:vpn_wireguard_stub/infrastructure/core/contracts/configure/configurable_async_stream.dart';
+import 'package:vpn_wireguard_stub/infrastructure/core/contracts/base/configurable_stateful.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/models/app_dependencies.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/providers/app_dependencies_provider.dart';
 import 'package:vpn_wireguard_stub/presentation/flows/main_flow/home_page.dart';
@@ -15,7 +15,7 @@ class SplashPage extends StatefulWidget {
     super.key,
   });
 
-  final ConfigurableAsyncStream<AppDependencies, AppDependenciesState>
+  final ConfigurableStateful<AppDependencies, AppDependenciesState>
       appDependenciesConfigurator;
 
   @override

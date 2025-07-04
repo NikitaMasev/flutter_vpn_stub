@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,7 +6,7 @@ import 'package:vpn_wireguard_stub/data/sources/shared/shared_platform_persisten
 import 'package:vpn_wireguard_stub/infrastructure/core/configurators/app/app_dependencies_state.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/configurators/data_sources_configurator.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/configurators/repositories_configurator.dart';
-import 'package:vpn_wireguard_stub/infrastructure/core/contracts/configure/configurable_async_stream.dart';
+import 'package:vpn_wireguard_stub/infrastructure/core/contracts/base/configurable_stateful.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/models/app_dependencies.dart';
 import 'package:vpn_wireguard_stub/infrastructure/core/models/env_data.dart';
 import 'package:vpn_wireguard_stub/infrastructure/services/permissions/permissions_helper.dart';
@@ -16,13 +15,12 @@ import 'package:vpn_wireguard_stub/infrastructure/services/wireguard/wireguard_w
 import 'package:wireguard_flutter/wireguard_flutter.dart';
 
 final class AppDependenciesConfigurator
-    implements ConfigurableAsyncStream<AppDependencies, AppDependenciesState> {
+    implements ConfigurableStateful<AppDependencies, AppDependenciesState> {
   AppDependenciesConfigurator({
     required final EnvData envData,
     required final SharedPlatformPersistent sharedPlatformPersistent,
     required final AppLocalizations appLocalizations,
-  })
-      : _envData = envData,
+  })  : _envData = envData,
         _sharedPlatformPersistent = sharedPlatformPersistent,
         _appLocalizations = appLocalizations;
 
@@ -108,14 +106,16 @@ Endpoint = 192.168.1.1:3333
       onboardingPersistent: _sharedPlatformPersistent,
     );
 
-    _controllerDependenciesState..add(
-      AppDependenciesLoading(
-        progressPercent: 1,
-        description: _appLocalizations.dependReady,
-      ),
-    )..add(
-      AppDependenciesSuccess(appDependencies: appDependencies),
-    );
+    _controllerDependenciesState
+      ..add(
+        AppDependenciesLoading(
+          progressPercent: 1,
+          description: _appLocalizations.dependReady,
+        ),
+      )
+      ..add(
+        AppDependenciesSuccess(appDependencies: appDependencies),
+      );
 
     return appDependencies;
   }
