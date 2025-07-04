@@ -1,6 +1,3 @@
-//ignore_for_file: one_member_abstracts
+import 'package:vpn_wireguard_stub/infrastructure/core/contracts/base/configurable.dart';
 
-///TODO Maybe unite with [Configurable]
-abstract interface class Runnable {
-  void run();
-}
+abstract interface class Runnable implements Configurable<void> {}
